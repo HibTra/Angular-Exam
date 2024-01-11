@@ -1,0 +1,28 @@
+<app-add-product *ngIf="this._service.showAddModal==true"></app-add-product>
+<div class="header">
+    <button (click)="this._service.showAddModal=true" type="button" class="btn btn-danger"><fa-icon [icon]="faAdd"></fa-icon> Add Product</button>
+    <input class="form-control mr-sm-2" #prod (keyup.backspace)="searchProduct(prod.value)" (keypress)="searchProduct(prod.value)" type="search" placeholder="Search" aria-label="Search">
+</div>
+
+<div class="container-fluid">
+    <div class="card" style="width: 18rem;" *ngFor="let product of products" >
+        
+        <h5 class="card-title">{{product.brand}}</h5>
+        <img class="card-img-top" [routerLink]="['detail',product.id]" style="height: 300px;width: 250px;" src="assets/images/{{product.image}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <h3>{{product.price}} DNT</h3>
+          <hr>
+          <div class="footer">
+            <div id="stock">
+                Stock
+                <div id="quantity">{{product.quantity}}</div>
+            </div>
+            <div>
+            <fa-icon [icon]="faPen" [routerLink]="['update',product.id]" style="padding: 15px;" ></fa-icon>
+            <fa-icon [icon]="faTrash" style="padding: 15px;"  (click)="delete(product.id)" ></fa-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
